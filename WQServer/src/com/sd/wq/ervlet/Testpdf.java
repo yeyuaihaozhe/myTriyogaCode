@@ -1,0 +1,116 @@
+package com.sd.wq.ervlet;
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+
+/**
+ * ģ�������õ�servlet
+ */
+public class Testpdf extends HttpServlet {
+
+	/**
+	 * Default constructor.
+	 */
+	public Testpdf() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+
+		pdfToImage(req.getParameter("path"), res,req.getParameter("page"));
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * PDFBOXתͼƬ
+	 * 
+	 * @param pdfUrl
+	 *            pdf��·��
+	 * @param imgTempUrl
+	 *            ͼƬ���·��
+	 */
+	public static void pdfToImage(String pdfUrl, HttpServletResponse res,String selpage) {
+		try {
+			
+			
+			
+				
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				PdfStamper pdfStamper = null;
+				PDDocument pdDocument = null;
+
+				PdfReader pdfReader = new PdfReader(pdfUrl);
+				pdfReader.selectPages(selpage);
+				System.out.println("selpage:"+selpage);
+				pdfStamper = new PdfStamper(pdfReader, out);
+				pdfStamper.close();
+				// ����PdfBox���ͼ��
+				pdDocument = PDDocument.load(new ByteArrayInputStream(out
+						.toByteArray()));
+				OutputStream outputStream = (OutputStream) res
+						.getOutputStream();
+				ImageOutputStream output = ImageIO
+						.createImageOutputStream(outputStream);
+				PDPage page = (PDPage) pdDocument.getDocumentCatalog()
+						.getAllPages().get(0);
+				BufferedImage image = page.convertToImage();
+
+				BufferedImage useimage = new BufferedImage(image.getWidth(),image.getHeight(), BufferedImage.TYPE_INT_RGB);
+				 useimage.getGraphics().drawImage(image.getScaledInstance(image.getWidth(),image.getHeight(), Image.SCALE_SMOOTH), 0,0,null);
+				
+				 try {  
+			            ImageIO.write(useimage, "PNG", res.getOutputStream());
+			        } catch (IOException e) {  
+			            e.printStackTrace();  
+			        }
+				 
+				 /*JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(res
+						.getOutputStream());
+				JPEGEncodeParam jep = JPEGCodec
+						.getDefaultJPEGEncodeParam(useimage);
+				 ѹ������ 
+				jep.setQuality(1f, true);
+				encoder.encode(useimage, jep);*/
+					output.flush();
+					outputStream.flush();
+					output.close();
+					outputStream.close();
+				pdDocument.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GB2312"?>
+<project basedir="." default="jar" name="CombaReport">
+	<property name="language" location="cn" />
+	<property name="web" location="WebContent" />
+	<property name="build"  location="build" />
+	<property name="doc"  location="doc" />
+	<property name="src"  location="src" />
+	<property name="dist" location="dist" />
+	<property name="charset" value="UTF-8"/>
+	
+
+	<path id="javac-lib">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${web}/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+    </path>
+	
+    <target name="clean">
+		<delete dir="${build}" failonerror="false" />
+		<delete dir="${dist}" failonerror="false" />
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${dist}" />
+		<mkdir dir="${build}" />
+	</target>
+
+    <target name="compile" depends="init">
+        <javac destdir="${build}" debug="true" encoding="${charset}">
+            <src path="${src}"/>
+            <classpath refid="javac-lib"/>
+        </javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${dist}/comba-WQ-receive.jar">
+			<fileset dir="${build}" includes="com/**/*.class" />
+		</jar>
+		<delete dir="${build}" failonerror="false" />
+	</target>
+</project>

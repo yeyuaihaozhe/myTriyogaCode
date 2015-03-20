@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model
+END
+NewsMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model/NewsMessage.java
+END
+Article.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model/Article.java
+END
+MusicMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model/MusicMessage.java
+END
+TextMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model/TextMessage.java
+END
+WqWsDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/src/!svn/ver/6324/research/WQServer/src/com/sd/wq/model/WqWsDataModel.java
+END

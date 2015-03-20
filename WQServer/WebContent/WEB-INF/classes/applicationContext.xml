@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://cxf.apache.org/transports/http/configuration 
+http://cxf.apache.org/schemas/configuration/http-conf.xsd 
+http://cxf.apache.org/jaxws 
+http://cxf.apache.org/schemas/jaxws.xsd"
+	default-autowire="byName">
+	
+	<http-conf:conduit name="*.http-conduit"> 
+        <http-conf:client ConnectionTimeout="200000" ReceiveTimeout="200000"/>  
+    </http-conf:conduit> 
+    
+	<context:annotation-config/>
+	<context:component-scan base-package="com.comba">
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
+	</context:component-scan>
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />  
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />  
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dataSourceBase" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>dataSourceBase</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.base.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.base.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.base.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.base.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="yogaDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>yogaDataSource</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.yoga.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.yoga.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.yoga.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.yoga.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="oaDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>oaDataSource</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.oa.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.oa.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.oa.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.oa.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="wqDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>wqDataSource</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.wq.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.wq.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.wq.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.wq.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	 <bean id="dataSourceRdm" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>dataSourceRdm</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.rdm.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.rdm.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.rdm.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.rdm.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="dataSourceSrm" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>dataSourceSrm</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.srm.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.srm.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.srm.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.srm.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="dataSourcePlm" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>dataSourcePlm</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.plm.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.plm.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.plm.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.plm.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSourcetimeCardRecord" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>timeCardRecord</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.timeCardRecord.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.timeCardRecord.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.timeCardRecord.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.timeCardRecord.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="dataSourcesbox" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>sbox</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.sbox.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.sbox.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.sbox.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.sbox.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	<bean id="dataSourceReport" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="dataSourceName">
+			<value>dataSourceReport</value>
+		</property>
+		<property name="driverClass">
+			<value>${datasource.report.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${datasource.report.url}</value>
+		</property>
+		<property name="user">
+			<value>${datasource.report.username}</value>
+		</property>
+		<property name="password">
+			<value>${datasource.report.password}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${c3p0.acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${c3p0.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${c3p0.maxPoolSize}</value>
+		</property>
+		<property name="maxStatements">
+			<value>${c3p0.maxStatements}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${c3p0.initialPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${c3p0.idleConnectionTestPeriod}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${c3p0.maxIdleTime}</value>
+		</property>
+		<property name="numHelperThreads">
+			<value>${c3p0.numHelperThreads}</value>
+		</property>
+	</bean>
+	
+	<bean id="baseDb" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourceBase" />
+		<property name="dbType">
+			<value>${datasource.base.type}</value>
+		</property>
+		<property name="dbName">
+			<value>baseDb</value>
+		</property>
+	</bean>
+	
+	<bean id="rdm" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourceRdm" />
+		<property name="dbType">
+			<value>${datasource.rdm.type}</value>
+		</property>
+		<property name="dbName">
+			<value>RDM</value>
+		</property>
+	</bean>
+	<bean id="srm" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourceSrm" />
+		<property name="dbType">
+			<value>${datasource.srm.type}</value>
+		</property>
+		<property name="dbName">
+			<value>SRM</value>
+		</property>
+	</bean>
+	<bean id="oaDb" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="oaDataSource" />
+		<property name="dbType">
+			<value>${datasource.oa.type}</value>
+		</property>
+		<property name="dbName">
+			<value>OA</value>
+		</property>
+	</bean>
+	<bean id="wqDb" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="wqDataSource" />
+		<property name="dbType">
+			<value>${datasource.wq.type}</value>
+		</property>
+		<property name="dbName">
+			<value>WQ</value>
+		</property>
+	</bean>
+	<bean id="plm" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourcePlm" />
+		<property name="dbType">
+			<value>${datasource.plm.type}</value>
+		</property>
+		<property name="dbName">
+			<value>PLM</value>
+		</property>
+	</bean>
+	<bean id="timeCardRecord" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourcetimeCardRecord" />
+		<property name="dbType">
+			<value>${datasource.timeCardRecord.type}</value>
+		</property>
+		<property name="dbName">
+			<value>timeCardRecord</value>
+		</property>
+	</bean>
+	<bean id="sbox" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourcesbox" />
+		<property name="dbType">
+			<value>${datasource.sbox.type}</value>
+		</property>
+		<property name="dbName">
+			<value>sbox</value>
+		</property>
+	</bean>
+	<bean id="yogaDb" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="yogaDataSource" />
+		<property name="dbType">
+			<value>${datasource.yoga.type}</value>
+		</property>
+		<property name="dbName">
+			<value>YOGA</value>
+		</property>
+	</bean>
+	<bean id="report" class="com.comba.wq.dao.jdbc.JdbcDAO">
+		<property name="dataSource" ref="dataSourceReport" />
+		<property name="dbType">
+			<value>${datasource.report.type}</value>
+		</property>
+		<property name="dbName">
+			<value>report</value>
+		</property>
+	</bean>
+	
+	<!-- 数据库转换配置，读取db数据源的表结构配置，存入baseDb数据源的表中 -->
+	<bean id="dbManager" class="com.comba.wq.db.transition.DbManager">
+		<property name="baseDb" ref="baseDb" />
+		<property name="rdm" ref="rdm" />
+		<property name="srm" ref="srm" />
+		<property name="plm" ref="plm" />
+		<property name="timeCardRecord" ref="timeCardRecord" />
+		<property name="sbox" ref="sbox" />
+		<property name="report" ref="report" />
+		<property name="oaDb" ref="oaDb" />
+		<property name="wqDb" ref="wqDb" />
+	</bean>
+	
+	<bean id="SpringContextUtil " class="com.comba.wq.util.SpringContextUtil"/>
+</beans>

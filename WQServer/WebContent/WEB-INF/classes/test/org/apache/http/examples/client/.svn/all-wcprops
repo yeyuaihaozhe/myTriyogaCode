@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client
+END
+ClientConnectionRelease.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientConnectionRelease.java
+END
+ClientChunkEncodedPost.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientChunkEncodedPost.java
+END
+ClientExecuteProxy.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientExecuteProxy.java
+END
+ClientExecuteSOCKS.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientExecuteSOCKS.java
+END
+ClientConfiguration.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientConfiguration.java
+END
+ClientAbortMethod.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientAbortMethod.java
+END
+ProxyTunnelDemo.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ProxyTunnelDemo.java
+END
+ClientWithRequestFuture.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientWithRequestFuture.java
+END
+ClientMultiThreadedExecution.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientMultiThreadedExecution.java
+END
+ClientCustomContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientCustomContext.java
+END
+ClientAuthentication.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientAuthentication.java
+END
+ClientPreemptiveDigestAuthentication.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientPreemptiveDigestAuthentication.java
+END
+ClientProxyAuthentication.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientProxyAuthentication.java
+END
+ClientPreemptiveBasicAuthentication.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientPreemptiveBasicAuthentication.java
+END
+ClientWithResponseHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientWithResponseHandler.java
+END
+QuickStart.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/QuickStart.java
+END
+ClientFormLogin.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientFormLogin.java
+END
+ClientCustomSSL.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientCustomSSL.java
+END
+ClientEvictExpiredConnections.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/src/!svn/ver/6324/research/WQServer/Test/test/org/apache/http/examples/client/ClientEvictExpiredConnections.java
+END

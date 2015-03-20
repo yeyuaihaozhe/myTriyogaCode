@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/src/!svn/ver/6895/research/WQServer/src/com/sd/wq/ervlet
+END
+FileDownload.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/src/!svn/ver/6895/research/WQServer/src/com/sd/wq/ervlet/FileDownload.java
+END
+Testpdf.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/src/!svn/ver/6878/research/WQServer/src/com/sd/wq/ervlet/Testpdf.java
+END
+OpenDirect.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/src/!svn/ver/6878/research/WQServer/src/com/sd/wq/ervlet/OpenDirect.java
+END
+CoreServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/src/!svn/ver/6623/research/WQServer/src/com/sd/wq/ervlet/CoreServlet.java
+END
+InitialServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/src/!svn/ver/6859/research/WQServer/src/com/sd/wq/ervlet/InitialServlet.java
+END
